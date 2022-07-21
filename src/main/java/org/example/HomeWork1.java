@@ -39,20 +39,17 @@ public class HomeWork1 {
 //    Find the employeeId of "Charlie" from a map using Java Streams Api.
     public Long findCharlieId(){
 
-        Long charlieId = 0L;
         Map<Long, String> employees = Map.of(
                 123L, "Alice",
                 124L, "Bob",
                 125L, "Charlie"
         );
 
-        for (Map.Entry<Long, String> entry : employees.entrySet()) {
-            if (entry.getValue().equals("Charlie")) {
-                charlieId = entry.getKey();
-            }
-        }
-
-        return charlieId;
+        return employees.entrySet().stream()
+                .filter(e -> e.getValue().equals("Charlie"))
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElse(null);
     }
 
     //problem 4...
@@ -102,7 +99,6 @@ public class HomeWork1 {
         String temp = array[i];
         array[i] = array[j];
         array[j] = temp;
-
     }
 
     //problem 7...
